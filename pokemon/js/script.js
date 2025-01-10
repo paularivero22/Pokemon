@@ -16,23 +16,10 @@ for (let i = 1; i <= 1025; i++) { // Hacemos un loop para traer los primeros 102
         });
 }
 
-function mostrarPokemon(poke) { // Función para mostrar los pokemons en el HTML
-
-    let tipos = poke.types.map(type => `
-            <p class="${type.type.name} tipo">${type.type.name}</p>
-        `).join('');
-
-    let pokeId = poke.id.toString();
-
-    if (pokeId.length === 1) {
-        pokeId = '00' + pokeId;
-    } else if (pokeId.length === 2) {
-        pokeId = '0' + pokeId;
-    }
-
-    let stats = poke.stats.map(stat => `
-        <p class="${stat.stat.name}">${stat.stat.name} ${stat.base_stat}</p>
-    `).join('');
+function mostrarPokemon(poke) {
+    let tipos = poke.types.map(type => `<p class="${type.type.name} tipo">${type.type.name}</p>`).join('');
+    let pokeId = poke.id.toString().padStart(3, '0');
+    let stats = poke.stats.map(stat => `<p class="stat">${stat.stat.name}: ${stat.base_stat}</p>`).join('');
 
     const div = document.createElement("div");
     div.classList.add("pokemon");
@@ -55,8 +42,31 @@ function mostrarPokemon(poke) { // Función para mostrar los pokemons en el HTML
         </div>
     `;
 
+    //redirigir al detalle
+    div.addEventListener('click', () => {
+        window.location.href = `./paginas/detalle.html?id=${poke.id}`;
+    });
+
     listaPokemon.append(div);
 }
+
+
+const barraBusqueda = document.querySelector('#barraBusqueda'); 
+const botonBuscar = document.querySelector('#botonBuscar'); 
+
+botonBuscar.addEventListener('click', () => {
+    const searchTerm = barraBusqueda.value.toLowerCase();
+    listaPokemon.innerHTML = ''; 
+
+    const pokemonsFiltrados = pokemons.filter(poke => poke.name.toLowerCase().includes(searchTerm));
+
+    if (pokemonsFiltrados.length > 0) {
+        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
+    } else {
+        listaPokemon.innerHTML = '<p>No se encontraron Pokémon con ese nombre.</p>';
+    }
+});
+
 
 //filtrar por generación
 /*botonesGen.forEach(boton => boton.addEventListener('click', (event) => { // Evento para filtrar los pokemons por generación
