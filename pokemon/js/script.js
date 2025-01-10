@@ -17,7 +17,8 @@ for (let i = 1; i <= 1025; i++) { // Hacemos un loop para traer los primeros 102
 }
 
 function mostrarPokemon(poke) { // Función para mostrar los pokemons en el HTML
-
+    let gen=poke.version;
+    console.log(gen);
     let tipos = poke.types.map(type => `
             <p class="${type.type.name} tipo">${type.type.name}</p>
         `).join('');
@@ -58,20 +59,34 @@ function mostrarPokemon(poke) { // Función para mostrar los pokemons en el HTML
     listaPokemon.append(div);
 }
 
-//filtrar por generación
-/*botonesGen.forEach(boton => boton.addEventListener('click', (event) => { // Evento para filtrar los pokemons por generación
-    const botonId = event.currentTarget.id; // Obtenemos el ID del botón
+//filtrar por generación.
+const generations = {
+    gen1: [0, 151],
+    gen2: [151, 251],
+    gen3: [251, 386],
+    gen4: [386, 494],
+    gen5: [494, 649],
+    gen6: [649, 721],
+    gen7: [721, 809],
+    gen8: [809, 905],
+    gen9: [905, 1025]
+};
 
+botonesGen.forEach(button => {
+    button.addEventListener('click', () => {
+        const genId = button.id;
+        const [start, end] = generations[genId];
+        const filteredPokemon = pokemons.slice(start, end);
+        displayPokemon(filteredPokemon);
+    });
+});
+
+function displayPokemon(pokemon) {
     listaPokemon.innerHTML = '';
-
-    if (botonId.startsWith('gen')) {
-        const pokemonsFiltrados = pokemons.filter(poke => poke.);
-        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
-    } else {
-        const pokemonsFiltrados = pokemons.filter(poke => poke.types.some(type => type.type.name.includes(botonId)));
-        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
-    }
-}));*/
+    pokemon.forEach(poke => {
+        mostrarPokemon(poke);
+    });
+}
 
 botonesTipo.forEach(boton => boton.addEventListener('click', (event) => {
     const botonId = event.currentTarget.id;
