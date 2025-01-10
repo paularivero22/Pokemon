@@ -16,10 +16,24 @@ for (let i = 1; i <= 1025; i++) { // Hacemos un loop para traer los primeros 102
         });
 }
 
-function mostrarPokemon(poke) {
-    let tipos = poke.types.map(type => `<p class="${type.type.name} tipo">${type.type.name}</p>`).join('');
-    let pokeId = poke.id.toString().padStart(3, '0');
-    let stats = poke.stats.map(stat => `<p class="stat">${stat.stat.name}: ${stat.base_stat}</p>`).join('');
+function mostrarPokemon(poke) { // Función para mostrar los pokemons en el HTML
+    let gen=poke.version;
+    console.log(gen);
+    let tipos = poke.types.map(type => `
+            <p class="${type.type.name} tipo">${type.type.name}</p>
+        `).join('');
+
+    let pokeId = poke.id.toString();
+
+    if (pokeId.length === 1) {
+        pokeId = '00' + pokeId;
+    } else if (pokeId.length === 2) {
+        pokeId = '0' + pokeId;
+    }
+
+    let stats = poke.stats.map(stat => `
+        <p class="${stat.stat.name}">${stat.stat.name} ${stat.base_stat}</p>
+    `).join('');
 
     const div = document.createElement("div");
     div.classList.add("pokemon");
@@ -42,46 +56,37 @@ function mostrarPokemon(poke) {
         </div>
     `;
 
-    //redirigir al detalle
-    div.addEventListener('click', () => {
-        window.location.href = `./paginas/detalle.html?id=${poke.id}`;
-    });
-
     listaPokemon.append(div);
 }
 
+//filtrar por generación.
+const generations = {
+    gen1: [0, 151],
+    gen2: [151, 251],
+    gen3: [251, 386],
+    gen4: [386, 494],
+    gen5: [494, 649],
+    gen6: [649, 721],
+    gen7: [721, 809],
+    gen8: [809, 905],
+    gen9: [905, 1025]
+};
 
-const barraBusqueda = document.querySelector('#barraBusqueda'); 
-const botonBuscar = document.querySelector('#botonBuscar'); 
-
-botonBuscar.addEventListener('click', () => {
-    const searchTerm = barraBusqueda.value.toLowerCase();
-    listaPokemon.innerHTML = ''; 
-
-    const pokemonsFiltrados = pokemons.filter(poke => poke.name.toLowerCase().includes(searchTerm));
-
-    if (pokemonsFiltrados.length > 0) {
-        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
-    } else {
-        listaPokemon.innerHTML = '<p>No se encontraron Pokémon con ese nombre.</p>';
-    }
+botonesGen.forEach(button => {
+    button.addEventListener('click', () => {
+        const genId = button.id;
+        const [start, end] = generations[genId];
+        const filteredPokemon = pokemons.slice(start, end);
+        displayPokemon(filteredPokemon);
+    });
 });
 
-
-//filtrar por generación
-/*botonesGen.forEach(boton => boton.addEventListener('click', (event) => { // Evento para filtrar los pokemons por generación
-    const botonId = event.currentTarget.id; // Obtenemos el ID del botón
-
+function displayPokemon(pokemon) {
     listaPokemon.innerHTML = '';
-
-    if (botonId.startsWith('gen')) {
-        const pokemonsFiltrados = pokemons.filter(poke => poke.);
-        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
-    } else {
-        const pokemonsFiltrados = pokemons.filter(poke => poke.types.some(type => type.type.name.includes(botonId)));
-        pokemonsFiltrados.forEach(poke => mostrarPokemon(poke));
-    }
-}));*/
+    pokemon.forEach(poke => {
+        mostrarPokemon(poke);
+    });
+}
 
 botonesTipo.forEach(boton => boton.addEventListener('click', (event) => {
     const botonId = event.currentTarget.id;
