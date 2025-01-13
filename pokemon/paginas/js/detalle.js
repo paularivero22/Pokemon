@@ -35,14 +35,74 @@ function getPokemonDescription(pokemonId, poke) {
                 ? flavorTextEntry.flavor_text.replace(/\n/g, " ")
                 : "No hay descripción disponible.";
 
-            mostrarDetalle(poke, description, speciesData);
+            mostrarDetalle(poke, description, speciesData, poke.types);
         })
         .catch(error => console.error('Error al obtener la descripción del Pokémon:', error));
 }
 
-function mostrarDetalle(poke, description, speciesData) {
+function obtenerEfectividades(tipos) {
+    const promesasTipos = tipos.map(tipo =>
+        fetch(tipo.type.url).then(response => response.json())
+    );
+
+    Promise.all(promesasTipos).then(datosTipos => {
+        const efectividades = {
+            doble_dano: [],
+            mitad_dano: [],
+            sin_dano: []
+        };
+
+        datosTipos.forEach(data => {
+            data.damage_relations.double_damage_from.forEach(tipo => efectividades.doble_dano.push(tipo.name));
+            data.damage_relations.half_damage_from.forEach(tipo => efectividades.mitad_dano.push(tipo.name));
+            data.damage_relations.no_damage_from.forEach(tipo => efectividades.sin_dano.push(tipo.name));
+        });
+
+        efectividades.doble_dano = [...new Set(efectividades.doble_dano)];
+        efectividades.mitad_dano = [...new Set(efectividades.mitad_dano)];
+        efectividades.sin_dano = [...new Set(efectividades.sin_dano)];
+
+        generarTablaEfectividades(efectividades);
+    }).catch(error => console.error('Error al obtener las efectividades:', error));
+}
+
+function generarTablaEfectividades(efectividades) {
+    // Crear los tipos con las clases adecuadas sin comas
+    const crearTiposHTML = (tipos) => {
+        return tipos.map(tipo => `<p class="${tipo} tipo">${tipo}</p>`).join('');
+    };
+
+    // Crear la tabla HTML con los datos correctos
+    const tablaHTML = `
+        <div class="pokemon-efectividades">
+            <h3>Tabla de Efectividades</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recibe Doble Daño</th>
+                        <th>Recibe Mitad de Daño</th>
+                        <th>No Recibe Daño</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="doble-dano">${crearTiposHTML(efectividades.doble_dano) || 'Ninguno'}</td>
+                        <td class="mitad-dano">${crearTiposHTML(efectividades.mitad_dano) || 'Ninguno'}</td>
+                        <td class="sin-dano">${crearTiposHTML(efectividades.sin_dano) || 'Ninguno'}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    `;
+
+    // Insertar la tabla en el contenedor correspondiente
+    document.querySelector('.tabla-efect').innerHTML = tablaHTML;
+}
+
+
+function mostrarDetalle(poke, description, speciesData, tipos) {
     const pokeId = poke.id.toString().padStart(3, '0');
-    let tipos = poke.types.map(type => `<p class="${type.type.name} tipo">${type.type.name}</p>`).join('');
+    let tiposHTML = poke.types.map(type => `<p class="${type.type.name} tipo">${type.type.name}</p>`).join('');
     let stats = poke.stats.map(stat => {
         const statsEsp = statsTraducidas[stat.stat.name] || stat.stat.name;
         return `<p class="stat"><b>${statsEsp}:</b> ${stat.base_stat}</p>`;
@@ -98,7 +158,7 @@ function mostrarDetalle(poke, description, speciesData) {
 
                 <h3>Tipo</h3>
                 <div class="pokemon-tipos">
-                    ${tipos}
+                    ${tiposHTML}
                     <br>
                 </div>
 
@@ -106,6 +166,10 @@ function mostrarDetalle(poke, description, speciesData) {
                 <div class="pokemon-stats">
                     ${stats}
                     <br>
+                </div>
+
+                <div class="tabla-efect">
+
                 </div>
             </div>
             <div class="sprites">
@@ -120,6 +184,8 @@ function mostrarDetalle(poke, description, speciesData) {
             </div>
         </div>
     `;
+
+    obtenerEfectividades(tipos);
 }
 
 // Navegación entre Pokémon
