@@ -171,3 +171,36 @@ h3 {
     font-size: large;
     border-radius: 5px;
 }
+
+
+.pokemon-efectividades table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.pokemon-efectividades th,
+.pokemon-efectividades td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: top; 
+    border: 1px solid #ddd; 
+}
+
+.pokemon-efectividades th {
+    background-color: var(--clr-light-gray); 
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+}
+
+.pokemon-efectividades td {
+    background-color: var(--clr-white); 
+}
+
+.pokemon-efectividades .tipo {
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
