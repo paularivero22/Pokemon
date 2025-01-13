@@ -160,3 +160,14 @@ h3 {
     height: auto;
     margin-left: 10px; 
 }
+
+.botonesHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 5px;
+    font-size: large;
+    border-radius: 5px;
+}

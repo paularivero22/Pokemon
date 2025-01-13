@@ -39,17 +39,7 @@ button {
     gap: .5rem;
 }
 
-.btn-tipo {
-    background-color: var(--clr-gray);
-    padding: .5rem;
-    border-radius: 100vmax;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: 600;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
-    transition: .2s;
-}
-
+.btn-tipo,
 .btn-gen {
     background-color: var(--clr-gray);
     padding: .5rem;
@@ -72,6 +62,10 @@ button {
     gap: 1rem;
 }
 
+.pokemon:hover {
+    background-color: rgb(200, 200, 200);
+}
+
 @media screen and (min-width: 470px) {
     .pokemon-todos {
         grid-template-columns: 1fr 1fr;
@@ -85,6 +79,7 @@ button {
 }
 
 .pokemon {
+    padding: 10px 0 30px;
     border-radius: 1rem;
     background-color: var(--clr-white);
     box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, .25);
@@ -153,19 +148,22 @@ button {
 .pokemon-stats p {
     font-size: 11px;
 }
-/*Estilos para la barra de busqueda*/
+
+/*Estilos para la barra de búsqueda*/
 .buscador {
     width: 100%;
-    margin: 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #barraBusqueda {
+    padding-left: 10px;
     width: 400px;
     margin: 10px;
     height: 30px;
+    border-radius: 5px;
 }
 
 #botonBuscar {
