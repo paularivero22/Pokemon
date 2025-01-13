@@ -39,7 +39,8 @@ button {
     gap: .5rem;
 }
 
-.btn-tipo, .btn-gen {
+.btn-tipo,
+.btn-gen {
     background-color: var(--clr-gray);
     padding: .5rem;
     border-radius: 100vmax;
@@ -61,7 +62,7 @@ button {
     gap: 1rem;
 }
 
-.pokemon:hover{
+.pokemon:hover {
     background-color: rgb(200, 200, 200);
 }
 
@@ -148,7 +149,7 @@ button {
     font-size: 11px;
 }
 
-/*Estilos para la barra de busqueda*/
+/*Estilos para la barra de búsqueda*/
 .buscador {
     width: 100%;
     margin: 20px 0;
@@ -163,4 +164,15 @@ button {
     margin: 10px;
     height: 30px;
     border-radius: 5px;
+}
+
+#botonBuscar {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    height: 30px;
+}
+
+#botonBuscar:hover {
+    cursor: pointer;
 }

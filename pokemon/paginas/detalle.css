@@ -161,12 +161,12 @@ h3 {
     margin-left: 10px; 
 }
 
-.botonesHeader{
+.botonesHeader {
     display: flex;
     justify-content: space-between;
 }
 
-.btn{
+.btn {
     padding: 5px;
     font-size: large;
     border-radius: 5px;

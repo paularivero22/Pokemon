@@ -29,7 +29,6 @@ function mostrarPokemon(poke) {
     let tipos = poke.types.map(type => `<p class="${type.type.name} tipo">${type.type.name}</p>`).join('');
     
     let pokeId = poke.id.toString().padStart(3, '0'); // Asegura que el ID tenga 3 dígitos
-    // let stats = poke.stats.map(stat => `<p class="stat">${stat.stat.name}: ${stat.base_stat}</p>`).join('');
 
     const div = document.createElement("div");
     div.classList.add("pokemon");
@@ -47,15 +46,8 @@ function mostrarPokemon(poke) {
             <div class="pokemon-tipos">
                 ${tipos}
             </div>
-            
         </div>
     `;
-
-    // Quito las estadisticas de las tarjetas para mostrarlas solamente al entrar en detalles de cada pokemon
-
-    // <div class="pokemon-stats">
-    //             ${stats}
-    //         </div>
 
     // Evento para redirigir a la página de detalles del Pokémon
     div.addEventListener('click', () => {
@@ -67,8 +59,10 @@ function mostrarPokemon(poke) {
 }
 
 const barraBusqueda = document.querySelector('#barraBusqueda'); 
+const botonBuscar = document.querySelector('#botonBuscar'); 
 
-barraBusqueda.addEventListener('input', () => {
+// Evento de búsqueda por botón
+botonBuscar.addEventListener('click', () => {
     const searchTerm = barraBusqueda.value.toLowerCase();
     listaPokemon.innerHTML = ''; 
 
@@ -81,7 +75,7 @@ barraBusqueda.addEventListener('input', () => {
     }
 });
 
-//filtrar por generación.
+// Filtrar por generación
 const generations = {
     gen1: [0, 151],
     gen2: [151, 251],
@@ -110,6 +104,7 @@ function displayPokemon(pokemon) {
     });
 }
 
+// Filtrar por tipo
 botonesTipo.forEach(boton => boton.addEventListener('click', (event) => {
     const botonId = event.currentTarget.id;
 
@@ -123,7 +118,7 @@ botonesTipo.forEach(boton => boton.addEventListener('click', (event) => {
     }
 }));
 
-//Al cargar la pagina muestra todos los pokemons como vista predeterminada
+// Al cargar la página muestra todos los pokemons como vista predeterminada
 document.addEventListener('DOMContentLoaded', function(){
     obtenerPokemons();
-})
+});
