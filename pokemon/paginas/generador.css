@@ -1,0 +1,67 @@
+.team-generator {
+    display: flex;
+    flex-direction: column;
+}
+
+hr {
+    color: white;
+}
+
+hr, button, h3, h4 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+button {
+    background-color: var(--clr-white);
+    width: 150px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+input, select {
+    height: 25px;
+    width: 400px;
+    border-radius: 5px;
+}
+
+.opciones {
+    height: 250px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.aleatorio {
+    grid-column: 1 / 1;
+    grid-row: 1/1;
+}
+
+.buscador {
+    grid-column: 2 / 2;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border-left: 1px solid white;
+    grid-row: 1/1;
+}
+
+.resultados-buscador {
+    width: 100%;
+    border: 1px solid black;
+    grid-row: 2/2;
+    grid-column: 2/2;
+}
+
+.opciones div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sugerencia-item {
+    background-color: var(--clr-white);
+    margin-bottom: 10px;
+    padding: 5px;
+}
