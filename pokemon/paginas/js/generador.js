@@ -2,6 +2,8 @@ const buscarInput = document.querySelector('#addPokemon'); // Campo de búsqueda
 const equipoDiv = document.querySelector('#equipo'); // Div donde se muestra el equipo actual
 const divResultados = document.querySelector('.resultados-buscador'); // Div para mostrar resultados
 const listaEquiposDiv = document.querySelector('#lista-equipos'); // Div para equipos guardados
+const filtroGeneracion = document.querySelector('#filtro-generacion'); // Filtro de generación
+const filtroTipo = document.querySelector('#filtro-tipo'); // Filtro de tipo
 let listaSugerencias = null; // Variable para la lista de sugerencias
 const pokemons = []; // Array global de Pokémon cargados
 let equiposGuardados = []; // Lista de equipos guardados
@@ -20,7 +22,46 @@ async function cargarPokemons() {
 }
 cargarPokemons();
 
-// Función para mostrar los resultados de búsqueda
+// Función para filtrar los Pokémon por generación
+function filtrarPorGeneracion(pokemon) {
+    const generacionSeleccionada = filtroGeneracion.value;
+    if (!generacionSeleccionada) return true; // Si no hay filtro, no filtrar por generación
+
+    // Filtrar por generación
+    switch (generacionSeleccionada) {
+        case '1':
+            return pokemon.id >= 1 && pokemon.id <= 151;
+        case '2':
+            return pokemon.id >= 152 && pokemon.id <= 251;
+        case '3':
+            return pokemon.id >= 252 && pokemon.id <= 386;
+        case '4':
+            return pokemon.id >= 387 && pokemon.id <= 493;
+        case '5':
+            return pokemon.id >= 494 && pokemon.id <= 649;
+        case '6':
+            return pokemon.id >= 650 && pokemon.id <= 721;
+        case '7':
+            return pokemon.id >= 722 && pokemon.id <= 809;
+        case '8':
+            return pokemon.id >= 810 && pokemon.id <= 898;
+        case '9':
+            return pokemon.id >= 899 && pokemon.id <= 1025;
+        default:
+            return true;
+    }
+}
+
+// Función para filtrar los Pokémon por tipo
+function filtrarPorTipo(pokemon) {
+    const tipoSeleccionado = filtroTipo.value;
+    if (!tipoSeleccionado) return true; // Si no hay filtro, no filtrar por tipo
+
+    // Filtrar por tipo
+    return pokemon.types.some(tipo => tipo.type.name === tipoSeleccionado);
+}
+
+// Función para mostrar los resultados de búsqueda considerando los filtros
 function mostrarSugerencias(termino) {
     if (!listaSugerencias) {
         listaSugerencias = document.createElement('ul');
@@ -29,7 +70,9 @@ function mostrarSugerencias(termino) {
     }
 
     const sugerencias = pokemons.filter(pokemon =>
-        pokemon.name.toLowerCase().includes(termino.toLowerCase())
+        pokemon.name.toLowerCase().includes(termino.toLowerCase()) &&
+        filtrarPorGeneracion(pokemon) && // Aplicar el filtro por generación
+        filtrarPorTipo(pokemon) // Aplicar el filtro por tipo
     );
 
     listaSugerencias.innerHTML = '';
@@ -53,6 +96,7 @@ function mostrarSugerencias(termino) {
     }
 }
 
+// Función para generar el equipo aleatorio con filtros
 function generarEquipo() {
     equipoDiv.innerHTML = '';
 
@@ -65,15 +109,17 @@ function generarEquipo() {
 
     while (equipoAleatorio.size < 6) {
         const indiceAleatorio = Math.floor(Math.random() * pokemons.length);
-        equipoAleatorio.add(pokemons[indiceAleatorio]);
+        const pokemon = pokemons[indiceAleatorio];
+
+        if (filtrarPorGeneracion(pokemon) && filtrarPorTipo(pokemon)) {
+            equipoAleatorio.add(pokemon);
+        }
     }
 
     equipoAleatorio.forEach(pokemon => añadirAlEquipo(pokemon));
 }
 
-const botonGenerar = document.querySelector('#generar-equipo');
-botonGenerar.addEventListener('click', generarEquipo);
-
+// Función para añadir un Pokémon al equipo
 function añadirAlEquipo(pokemon) {
     const equipoActual = equipoDiv.querySelectorAll('.pokemon-equipo');
     if (equipoActual.length >= 6) {
@@ -188,6 +234,9 @@ function eliminarEquipo(index) {
     mostrarEquiposGuardados();
 }
 
+const botonGenerar = document.querySelector('#generar-equipo');
+botonGenerar.addEventListener('click', generarEquipo);
+
 const botonGuardar = document.querySelector('#guardar-equipo');
 botonGuardar.addEventListener('click', guardarEquipo);
 
@@ -210,5 +259,20 @@ buscarInput.addEventListener('input', (e) => {
 document.addEventListener('click', (e) => {
     if (listaSugerencias && !buscarInput.contains(e.target) && !divResultados.contains(e.target)) {
         listaSugerencias.innerHTML = '';
+    }
+});
+
+// Aplicar los filtros cuando el usuario cambie las selecciones
+filtroGeneracion.addEventListener('change', () => {
+    const termino = buscarInput.value.trim();
+    if (termino.length > 0) {
+        mostrarSugerencias(termino);
+    }
+});
+
+filtroTipo.addEventListener('change', () => {
+    const termino = buscarInput.value.trim();
+    if (termino.length > 0) {
+        mostrarSugerencias(termino);
     }
 });
