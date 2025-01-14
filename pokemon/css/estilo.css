@@ -67,7 +67,6 @@ header {
     box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, .5);
 }
 
-
 .menu li a {
     padding: 15px;
     border-left: 1px solid black;
@@ -96,16 +95,7 @@ header {
     gap: .5rem;
 }
 
-.btn-tipo {
-    background-color: var(--clr-gray);
-    padding: .5rem;
-    border-radius: 100vmax;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: 600;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, .25);
-    transition: .2s;
-}
+.btn-tipo,
 .btn-gen {
     background-color: var(--clr-gray);
     padding: .5rem;
@@ -159,6 +149,7 @@ main {
 
 .pokemon:hover {
     background-color: rgb(200, 200, 200);
+    cursor: pointer;
 }
 
 .pokemon-id-back {

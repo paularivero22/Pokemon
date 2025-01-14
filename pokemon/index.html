@@ -8,10 +8,10 @@
     <title>Pokédex</title>
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/estiloComun.css">
+    <script src="./js/script.js" defer></script>
 </head>
 
 <body>
-
     <header>
         <nav>
             <ul class="menu">
@@ -64,17 +64,16 @@
         <div class="buscador">
             <label for="barraBusqueda"><h3>NOMBRE O NÚMERO</h3></label>
             <input id="barraBusqueda" placeholder="Buscar Pokémon" />
-            <button id="botonBuscar">Buscar</button>
+            <div id="pagination"></div>
         </div>
 
+        <div id="loading">Cargando...</div>
         <div id="todos">
             <div class="pokemon-todos" id="listaPokemon">
                 <!-- Aquí se mostrarán los Pokémon -->
             </div>
         </div>
     </main>
-
-    <script src="./js/script.js"></script>
 </body>
 
 </html>
