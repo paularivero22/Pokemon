@@ -118,11 +118,11 @@ function mostrarDetalle(poke, description, speciesData, tipos) {
     if (genderRate === -1) {
         genderHTML = "Desconocido";
     } else if (genderRate === 0) {
-        genderHTML = `<img src="../img/macho.png" alt="Macho">`;
+        genderHTML = `<img src="./img/macho.png" alt="Macho">`;
     } else if (genderRate === 8) {
-        genderHTML = `<img src="../img/hembra.png" alt="Hembra">`;
+        genderHTML = `<img src="./img/hembra.png" alt="Hembra">`;
     } else {
-        genderHTML = `<img src="../img/macho.png" alt="Macho"><img src="../img/hembra.png" alt="Hembra">`;
+        genderHTML = `<img src="./img/macho.png" alt="Macho"><img src="./img/hembra.png" alt="Hembra">`;
     }
 
     pokemonDetailDiv.innerHTML = `
@@ -190,7 +190,7 @@ function mostrarDetalle(poke, description, speciesData, tipos) {
 
 // Navegación entre Pokémon
 document.querySelector('.btn-volver').addEventListener('click', () => {
-    window.location.href = '../index.html';
+    window.location.href = './index.html';
 });
 
 document.querySelector('.btn-siguiente').addEventListener('click', () => {
