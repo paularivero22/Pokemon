@@ -150,6 +150,10 @@ function añadirAlEquipo(pokemon) {
     divPokemon.appendChild(botonEliminar);
 
     equipoDiv.appendChild(divPokemon);
+
+    divPokemon.addEventListener('click', function() {
+        window.open(`http://127.0.0.1:5500/pokemon/detalle.html?id=${pokemon.id}`, '_blank');
+    });
 }
 
 // Función para guardar el equipo actual
