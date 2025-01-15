@@ -1,0 +1,25 @@
+-Agregar ordenar alfabeticamente? por id? https://www.pokemon.com/es/pokedex
+
+-Cambiar el idioma a español de: los tipos, habilidades...
+
+comparador
+
+generador de equipos
+
+combates
+
+
+
+
+
+
+
+-Arreglar imagenes por delante y por detras (ultimos pokemons) https://pokeapi.co/api/v2/pokemon/1025/
+-Agregar imagenes hembra? https://pokeapi.co/api/v2/pokemon/heracross/ 214
+-Agregar funcion para cuando pases el cursor por encima de la imagen que se agrande
+-Agregar busqueda por numero de id?
+-Agregar paginador y limitar el numero de pokemons que se muestran a X
+-Agregar menu de navegacion principal para navegar entre las diferentes paginas (pokedex, comparador de pokemons, generador de equipos, combates). Añadir menu tambien a detalles? https://www.pokemon.com/es
+-Reorganizar estructura: meter todo el estilo en la carpeta css, javaScript en js, crear public con todas las paginas .html
+-Agregar debilidades
+-LocalStorage?

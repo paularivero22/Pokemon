@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/estiloComun.css">
+    <script src="./js/script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="./index.html">Pokedex</a></li>
+                <li><a href="./comparador.html">Comparador</a></li>
+                <li><a href="./generador.html">Generador de Equipos</a></li>
+                <li><a href="./index.html">Combates</a></li>
+            </ul>
+        </nav>
+        <nav class="nav">
+            <p>Filtrar por Generación</p>
+            <ul class="nav-list">
+                <li><button class="btn-gen primera" id="gen1">Primera Generación</button></li>
+                <li><button class="btn-gen segunda" id="gen2">Segunda Generación</button></li>
+                <li><button class="btn-gen tercera" id="gen3">Tercera Generación</button></li>
+                <li><button class="btn-gen cuarta" id="gen4">Cuarta Generación</button></li>
+                <li><button class="btn-gen quinta" id="gen5">Quinta Generación</button></li>
+                <li><button class="btn-gen sexta" id="gen6">Sexta Generación</button></li>
+                <li><button class="btn-gen septima" id="gen7">Séptima Generación</button></li>
+                <li><button class="btn-gen octava" id="gen8">Octava Generación</button></li>
+                <li><button class="btn-gen novena" id="gen9">Novena Generación</button></li>
+            </ul>
+        </nav>
+        <nav class="nav">
+            <p>Filtrar por tipo</p>
+            <ul class="nav-list">
+                <li><button class="btn-tipo" id="ver-todos">Ver todos</button></li>
+                <li><button class="btn-tipo normal" id="normal">Normal</button></li>
+                <li><button class="btn-tipo fire" id="fire">Fuego</button></li>
+                <li><button class="btn-tipo water" id="water">Agua</button></li>
+                <li><button class="btn-tipo grass" id="grass">Planta</button></li>
+                <li><button class="btn-tipo electric" id="electric">Electrico</button></li>
+                <li><button class="btn-tipo ice" id="ice">Hielo</button></li>
+                <li><button class="btn-tipo fighting" id="fighting">Lucha</button></li>
+                <li><button class="btn-tipo poison" id="poison">Veneno</button></li>
+                <li><button class="btn-tipo ground" id="ground">Tierra</button></li>
+                <li><button class="btn-tipo flying" id="flying">Volador</button></li>
+                <li><button class="btn-tipo psychic" id="psychic">Psíquico</button></li>
+                <li><button class="btn-tipo bug" id="bug">Bicho</button></li>
+                <li><button class="btn-tipo rock" id="rock">Roca</button></li>
+                <li><button class="btn-tipo ghost" id="ghost">Fantasma</button></li>
+                <li><button class="btn-tipo dark" id="dark">Siniestro</button></li>
+                <li><button class="btn-tipo dragon" id="dragon">Dragón</button></li>
+                <li><button class="btn-tipo steel" id="steel">Acero</button></li>
+                <li><button class="btn-tipo fairy" id="fairy">Hada</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="buscador">
+            <label for="barraBusqueda"><h3>NOMBRE O NÚMERO</h3></label>
+            <input id="barraBusqueda" placeholder="Buscar Pokémon" />
+            <div id="pagination"></div>
+        </div>
+
+
+        <div id="loading">Cargando...</div>
+        <div id="todos">
+            <div class="pokemon-todos" id="listaPokemon">
+                <!-- Aquí se mostrarán los Pokémon -->
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
