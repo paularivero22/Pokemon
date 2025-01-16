@@ -173,3 +173,60 @@ header {
     background-color: var(--pokemon-white);
     padding: 5px;
 }
+
+.menu-pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--pokemon-white);
+    border: 2px solid var(--pokemon-black);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.menu-pokemon h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--pokemon-black);
+}
+
+#equipoPokemon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.menu-pokemon .pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--pokemon-gray);
+    border: 1px solid var(--pokemon-black);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.menu-pokemon .pokemon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.menu-pokemon .pokemon img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.menu-pokemon .pokemon p {
+    font-size: 1rem;
+    color: var(--pokemon-black);
+}

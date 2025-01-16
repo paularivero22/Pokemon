@@ -1,13 +1,16 @@
 import Pokemon from "./Pokemon.js";
 
+const sprite = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
+const spriteBack = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/';
+
 const equipo1 = [
-    new Pokemon(1, 45, 100, 50, 49, 'bulbasaur', ['grass', 'poison'], 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'),
-    new Pokemon(4, 65, 100, 43, 52, 'charmander', ['fire'], 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png')
+    new Pokemon(1, 45, 100, 50, 49, 'bulbasaur', ['grass', 'poison']),
+    new Pokemon(4, 65, 100, 43, 52, 'charmander', ['fire'])
 ];
 
 const equipo2 = [
-    new Pokemon(7, 43, 100, 65, 48, 'squirtle', ['water'], 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/7.png'),
-    new Pokemon(25, 90, 100, 40, 55, 'pikachu', ['electric'], 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png')
+    new Pokemon(7, 43, 100, 65, 48, 'squirtle', ['water']),
+    new Pokemon(25, 90, 100, 40, 55, 'pikachu', ['electric'])
 ];
 
 const equipo1Data = equipo1.map(pokemon => ({
@@ -18,7 +21,7 @@ const equipo1Data = equipo1.map(pokemon => ({
     ataque: pokemon.ataque,
     nombre: pokemon.nombre,
     types: pokemon.types,
-    sprite: pokemon.sprite
+    sprite: `${sprite}${pokemon.id}.png`
 }));
 
 const equipo2Data = equipo2.map(pokemon => ({
@@ -29,7 +32,7 @@ const equipo2Data = equipo2.map(pokemon => ({
     ataque: pokemon.ataque,
     nombre: pokemon.nombre,
     types: pokemon.types,
-    sprite: pokemon.sprite
+    sprite: `${spriteBack}${pokemon.id}.png`
 }));
 
 // Guardar en localStorage
@@ -51,6 +54,10 @@ const equipoPokemon1 = localStorage.getItem('equipo1');
 const equipoPokemon2 = localStorage.getItem('equipo2');
 
 const botonAtacar = document.querySelector('.atacar');
+const botonCambiar = document.querySelector('.cambiar');
+const menuPokemon = document.getElementById('menuPokemon');
+const equipoPokemonDiv = document.getElementById('equipoPokemon');
+
 let puedeAtacar = true;
 
 let integranteEquipo1 = 0;
@@ -66,13 +73,22 @@ if (equipoPokemon1 && equipoPokemon2) {
         element.innerHTML = "";
         const speed = duration / text.length;
 
+        // Deshabilitar botones mientras se escribe el texto
+        botonAtacar.disabled = true;
+        botonCambiar.disabled = true;
+
         function write() {
             if (index < text.length) {
                 element.innerHTML += text.charAt(index);
                 index++;
                 setTimeout(write, speed);
-            } else if (callback) {
-                callback();
+            } else {
+                // Habilitar botones cuando termine de escribir el texto
+                botonAtacar.disabled = false;
+                botonCambiar.disabled = false;
+                if (callback) {
+                    callback();
+                }
             }
         }
 
@@ -80,8 +96,8 @@ if (equipoPokemon1 && equipoPokemon2) {
     }
 
     function actualizarContenedores() {
-        contenedorPokemon1.innerHTML = `<img src="${pokemonActual1.sprite}" alt="${pokemonActual1.nombre}">`;
-        contenedorPokemon2.innerHTML = `<img src="${pokemonActual2.sprite}" alt="${pokemonActual2.nombre}">`;
+        contenedorPokemon1.innerHTML = `<img src="${sprite}${pokemonActual1.id}.png" alt="${pokemonActual1.nombre}">`;
+        contenedorPokemon2.innerHTML = `<img src="${spriteBack}${pokemonActual2.id}.png" alt="${pokemonActual2.nombre}">`;
         vidaTexto1.innerHTML = 'Vida: ' + pokemonActual1.getVidaActual() + '/' + pokemonActual1.getVida();
         vidaTexto2.innerHTML = 'Vida: ' + pokemonActual2.getVidaActual() + '/' + pokemonActual2.getVida();
         vida1.style.width = `${(pokemonActual1.getVidaActual() / pokemonActual1.getVida()) * 100}%`;
@@ -257,14 +273,51 @@ if (equipoPokemon1 && equipoPokemon2) {
         }
     }
 
+    function mostrarMenuPokemon() {
+        if (!puedeAtacar) {
+            return;
+        }
+
+        equipoPokemonDiv.innerHTML = '';
+
+        equipo2Data.forEach((pokemon, index) => {
+            const div = document.createElement('div');
+            div.classList.add('pokemon');
+            div.innerHTML = `
+                <img src="${spriteBack}${pokemon.id}.png" alt="${pokemon.nombre}">
+                <p>${pokemon.nombre}</p>
+            `;
+            div.addEventListener('click', () => cambiarPokemon(index));
+            equipoPokemonDiv.appendChild(div);
+        });
+
+        menuPokemon.style.display = 'block';
+    }
+
+    function cambiarPokemon(index) {
+        if (index !== integranteEquipo2) {
+            integranteEquipo2 = index;
+            pokemonActual2 = equipo2[integranteEquipo2];
+            actualizarContenedores();
+            cerrarMenuPokemon();
+            typeWriter(textoCombate, `${capitalizeFirstLetter(pokemonActual2.getNombre())} ha sido enviado al combate.`, 1000);
+        }
+    }
+
+    function cerrarMenuPokemon() {
+        menuPokemon.style.display = 'none';
+    }
+
     let pokemonActual1 = equipo1[integranteEquipo1];
     let pokemonActual2 = equipo2[integranteEquipo2];
     vidaTexto1.innerHTML = 'Vida: ' + pokemonActual1.getVidaActual() + '/' + pokemonActual1.getVida();
     vidaTexto2.innerHTML = 'Vida: ' + pokemonActual2.getVidaActual() + '/' + pokemonActual2.getVida();
 
-    contenedorPokemon1.innerHTML = `<img src="${pokemonActual1.sprite}" alt="${pokemonActual1.name}">`;
-    contenedorPokemon2.innerHTML = `<img src="${pokemonActual2.sprite}" alt="${pokemonActual2.name}">`;
+    contenedorPokemon1.innerHTML = `<img src="${sprite}${pokemonActual1.id}.png" alt="${pokemonActual1.nombre}">`;
+    contenedorPokemon2.innerHTML = `<img src="${spriteBack}${pokemonActual2.id}.png" alt="${pokemonActual2.nombre}">`;
     botonAtacar.addEventListener('click', quitarVida);
+    botonCambiar.addEventListener('click', mostrarMenuPokemon);
+    menuPokemon.addEventListener('click', cerrarMenuPokemon);
 } else {
     console.error('No se encontraron los equipos en localStorage');
 }

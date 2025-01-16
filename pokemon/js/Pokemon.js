@@ -1,5 +1,5 @@
 class Pokemon {
-    constructor(id, velocidad, vida, defensa, ataque, nombre, types, sprite) {
+    constructor(id, velocidad, vida, defensa, ataque, nombre, types) {
         this.id = id;
         this.velocidad = velocidad;
         this.vida = vida;
@@ -8,7 +8,6 @@ class Pokemon {
         this.ataque = ataque;
         this.nombre = nombre;
         this.types = types;
-        this.sprite = sprite;
     }
 
     getId() {
