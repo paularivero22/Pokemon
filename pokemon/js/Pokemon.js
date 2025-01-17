@@ -10,6 +10,18 @@ class Pokemon {
         this.types = types;
     }
 
+    static async fromAPI(pokemonData) {
+        return new Pokemon(
+            pokemonData.id,
+            pokemonData.stats.speed,
+            pokemonData.stats.hp,
+            pokemonData.stats.defense,
+            pokemonData.stats.attack,
+            pokemonData.name,
+            pokemonData.types
+        );
+    }
+
     getId() {
         return this.id;
     }

@@ -10,17 +10,23 @@ async function fetchPokemon(id) {
         name: data.name,
         image: data.sprites.other["official-artwork"].front_default,
         types: data.types.map(type => type.type.name),
-        height: data.height,
-        weight: data.weight
+        stats: {
+            hp: data.stats[0].base_stat,
+            attack: data.stats[1].base_stat,
+            defense: data.stats[2].base_stat,
+            speed: data.stats[5].base_stat
+        }
     };
 }
 
 self.onmessage = async function (event) {
-    const { tipo } = event.data;
+    const { tipo, pokemonIds } = event.data;
     let promises;
 
     if (tipo === 'cargarTodos') {
         promises = Array.from({ length: 1025 }, (_, i) => fetchPokemon(i + 1));
+    } else if (tipo === 'cargarEquipo') {
+        promises = pokemonIds.map(id => fetchPokemon(id));
     }
 
     const pokemones = await Promise.all(promises);
