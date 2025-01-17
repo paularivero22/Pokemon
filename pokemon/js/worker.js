@@ -11,7 +11,8 @@ async function fetchPokemon(id) {
         image: data.sprites.other["official-artwork"].front_default,
         types: data.types.map(type => type.type.name),
         height: data.height,
-        weight: data.weight
+        weight: data.weight,
+        stats: data.stats
     };
 }
 
