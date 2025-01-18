@@ -43,3 +43,8 @@ main{
     display: flex;
     flex-direction: column;
 }
+
+.pokemon-stats p {
+    font-size: 1em;
+    font-weight: bold;
+}
