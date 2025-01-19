@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Equipos</title>
     <link rel="stylesheet" href="../css/estilo.css">
-    <link rel="stylesheet" href="generador.css">
+    <link rel="stylesheet" href="../css/generador.css">
 </head>
 
 <body>
     <header>
         <nav>
             <ul class="menu">
-                <li><a href="../index.html">Pokedex</a></li>
-                <li><a href="../index.html">Comparador</a></li>
-                <li><a href="generador.html">Generador de Equipos</a></li>
-                <li><a href="../paginas/combate.html">Combates</a></li>
+                <li><a href="index.html">Pokedex</a></li>
+                <li><a href="index.html">Comparador</a></li>
+                <li><a href="./generador.html">Generador de Equipos</a></li>
+                <li><a href="index.html">Combates</a></li>
             </ul>
         </nav>
     </header>
@@ -31,7 +31,6 @@
         <h4>Filtros</h4>
         <div class="filtros">
             <select id="filtro-generacion">
-                <option value="">Filtrar por Generación</option>
                 <option value="1">Primera Generación</option>
                 <option value="2">Segunda Generación</option>
                 <option value="3">Tercera Generación</option>
@@ -89,21 +88,23 @@
             <hr>
         </div>
 
-        <div id="equipo" class="pokemon-todos">
-            <h2>Equipo</h2>
+        <h2>Equipo</h2>
+        <div id="equipo" class="equipo">
+
 
         </div>
 
         <button id="guardar-equipo">Guardar equipo</button>
-
+        <hr>
+        
+        <h2>Equipos Guardados</h2>
         <div class="equipos-guardados">
-            <h2></h2>
-            <div id="lista-equipos">
-
-            </div>
+            
+            <div id="lista-equipos"></div>
         </div>
+
     </main>
-    <script src="./js/generador.js"></script>
+    <script src="../js/generador.js"></script>
 </body>
 
 </html>
