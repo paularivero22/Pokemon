@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estiloComun.css">
+    <link rel="stylesheet" href="../css/combate.css">
+    <script src="../js/combate.js" type="module"></script>
+    <title>Combates Pokemon</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="./index.html">Pokedex</a></li>
+                <li><a href="./comparador.html">Comparador</a></li>
+                <li><a href="./generador.html">Generador de Equipos</a></li>
+                <li><a href="#">Combates</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="contenedor contenedor1">
+            <div class="vida">
+                <div class="contenedorBarra1">
+                    <div class="barra1"></div>
+                </div>
+                <span class="textoVida1">Vida: 25/50</span>
+            </div>
+            <div class="pokemonActual" id="pokemonEquipo1"></div>
+        </div>
+        <div class="contenedor contenedor2">
+            <div class="pokemonActual" id="pokemonEquipo2"></div>
+            <div class="vida">
+                <div class="contenedorBarra2">
+                    <div class="barra2"></div>
+                </div>
+                <span class="textoVida2">Vida: 40/50</span>
+            </div>
+        </div>
+        <div id="acciones">
+            <div class="texto">El combate ha empezado.</div>
+            <div class="botones">
+                <button class="accion atacar">ATACAR</button>
+                <button class="accion cambiar">POKEMON</button>
+            </div>
+        </div>
+        <div id="menuPokemon" class="menu-pokemon" style="display: none;">
+            <h3>Equipo Pokémon</h3>
+            <div id="equipoPokemon"></div>
+        </div>
+    </main>
+
+    <button id="mostrarRegistros">Mostrar Registros de Combates</button>
+    <div id="registroCombates"></div>
+</body>
+
+</html>
