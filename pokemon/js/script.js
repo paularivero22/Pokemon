@@ -15,7 +15,7 @@ buscador.addEventListener('input', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('allPokemons')) {
-        worker.postMessage({ tipo: 'cargarTodos' });
+        worker.postMessage({ tipo: 'loadPokemons' });
     } else {
         renderPage(1);
     }
@@ -37,7 +37,7 @@ function iniciar() {
         renderPage(currentPage);
         loadingIndicator.style.display = 'none';
     } else {
-        worker.postMessage('loadPokemons');
+        worker.postMessage({ tipo: 'loadPokemons' });
         loadingIndicator.style.display = 'block';
     }
 
