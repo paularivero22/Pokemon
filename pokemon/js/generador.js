@@ -150,7 +150,7 @@ function añadirAlEquipo(pokemon) {
 
     equipoDiv.appendChild(divPokemon);
 
-    divPokemon.addEventListener('click', function() {
+    imagen.addEventListener('click', function() {
         window.open(`./detalles.html?id=${pokemon.id}`, '_blank');
     });
 }
