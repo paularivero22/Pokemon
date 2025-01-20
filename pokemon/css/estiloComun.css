@@ -1,4 +1,8 @@
 :root {
+    --clr-black: #1c1c1c;
+    --clr-gray: #ececec;
+    --clr-white: #f7f7f7;
+
     --type-normal: #A8A878;
     --type-fire: #F08030;
     --type-water: #6890F0;
@@ -26,6 +30,83 @@
     font-family: 'Rubik', sans-serif;
 }
 
+.menu {
+    height: 100px;
+    background-color: rgb(53, 53, 53);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.menu li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.menu li img {
+    max-width: 35px;
+    margin-bottom: 5px; 
+    margin-top: 10px; 
+}
+
+.menu li a {
+    text-align: center; 
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--clr-white);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu li a:hover {
+    background-color: var(--clr-gray);
+    color: var(--clr-black);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.menu li a:focus {
+    outline: 2px solid var(--clr-white);
+    outline-offset: 4px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.nav p {
+    color: var(--clr-white);
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nav-list li {
+    list-style: none;
+}
+
 ul {
     list-style-type: none;
 }
@@ -38,6 +119,8 @@ body {
 header {
     padding-block: 1rem;
     box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, .5);
+
+    margin-bottom: 20px;
 }
 
 main {
@@ -73,6 +156,7 @@ main {
     font-size: .85rem;
     padding: 0.5rem; 
 }
+
 .stat {
     background-color: var(--clr-gray);
     padding: .25rem .5rem; 
